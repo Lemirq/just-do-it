@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.fc {
+	@apply flex flex-col;
+}
+
+.fr {
+	@apply flex flex-row;
+}
+
+/* taken from https://css-tricks.com/inclusively-hidden/ */
+input[type='checkbox'] {
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+
+.blob1 {
+	background: radial-gradient(circle, rgba(9, 9, 121, 1) 0%, rgba(10, 8, 50, 0) 70%);
+}
