@@ -8,11 +8,14 @@
 		"dev": "vite",
 		"build": "vite build --base /just-do-it/",
 		"lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-		"preview": "vite preview"
+		"preview": "vite preview",
+		"predeploy": "npm run build",
+		"deploy": "gh-pages -d build"
 	},
 	"dependencies": {
 		"firebase": "^9.20.0",
 		"framer-motion": "^10.12.4",
+		"gh-pages": "^5.0.0",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
 		"react-firebase-hooks": "^5.1.1",
