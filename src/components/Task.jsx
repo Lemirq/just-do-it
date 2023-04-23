@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import useKeyboardShortcut from 'use-keyboard-shortcut';
 import Checkbox from './Checkbox';
 import { remove, ref, update } from 'firebase/database';
 import { db } from '../services/firebase';
@@ -6,27 +7,56 @@ import { TbTrashFilled, TbEdit } from 'react-icons/tb';
 import { motion } from 'framer-motion';
 import { FirebaseContext } from '../services/FirebaseContext';
 
-const Task = ({ task, variants }) => {
-	const { setId, setUpdateTaskVisible } = useContext(FirebaseContext);
+const Task = ({ task, variants, className }) => {
+	const { setId, setUpdateTaskVisible, user } = useContext(FirebaseContext);
 	const { status, day, text } = task;
-	console.log(status);
+
+	const {} = useKeyboardShortcut(
+		['Enter'],
+		(shortcutKeys) => {
+			handleUpdate(document.activeElement.parentElement.parentElement.querySelector('button:nth-child(1)'));
+		},
+		{
+			overrideSystem: false,
+			ignoreInputFields: false,
+			repeatOnHold: false,
+		}
+	);
+
+	const {} = useKeyboardShortcut(
+		['Shift', 'Backspace'],
+		(shortcutKeys) => {
+			handleDelete(document.activeElement.parentElement.parentElement.id);
+		},
+		{
+			overrideSystem: false,
+			ignoreInputFields: false,
+			repeatOnHold: false,
+		}
+	);
 
 	const handleCheckbox = (checked) => {
-		update(ref(db, `/tasks/${task.id}`), {
+		update(ref(db, `/users/${user.uid}/${task.id}`), {
 			status: checked ? 'complete' : 'incomplete',
 		});
 	};
 
-	const handleDelete = () => {
-		remove(ref(db, `/tasks/${task.id}`));
+	const handleDelete = (id) => {
+		remove(ref(db, `/users/${user.uid}/${id}`));
 	};
 
 	const handleUpdate = (el) => {
-		let id = el.target.parentElement.parentElement.parentElement.id
-			? el.target.parentElement.parentElement.parentElement.id
-			: el.target.parentElement.parentElement.parentElement.parentElement.id
-			? el.target.parentElement.parentElement.parentElement.parentElement.id
-			: el.target.parentElement.parentElement.id;
+		let id;
+		if (el.target) {
+			id = el.target.parentElement.parentElement.parentElement.id
+				? el.target.parentElement.parentElement.parentElement.id
+				: el.target.parentElement.parentElement.parentElement.parentElement.id
+				? el.target.parentElement.parentElement.parentElement.parentElement.id
+				: el.target.parentElement.parentElement.id;
+		} else {
+			id = el.parentElement.parentElement.id;
+		}
+		console.log(id);
 		setId(id);
 		setUpdateTaskVisible(true);
 	};
@@ -55,13 +85,15 @@ const Task = ({ task, variants }) => {
 			initial="hidden"
 			animate="show"
 			exit="exit"
-			className="w-full h-16 bg-white rounded-lg flex items-center justify-between px-4 cursor-pointer hover:bg-slate-200 transition-colors"
+			className={`w-full h-16 ${
+				className ? 'bg-slate-200 dark:bg-slate-600' : 'bg-white dark:bg-slate-700'
+			} focus rounded-lg flex items-center justify-between px-4 cursor-pointer hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors`}
 		>
 			<div className="fr justify-center items-center gap-3">
 				<Checkbox defaultChecked={status === 'incomplete' ? false : true} onChange={handleCheckbox} />
 				<div className="fc items-start justify-start">
-					<p className="text-lg">{text}</p>
-					<p className="text-sm text-slate-600">{formatDate(day)}</p>
+					<p className={`transition-all text-lg ${status === 'complete' ? 'line-through text-slate-500' : ''}`}>{text}</p>
+					<p className="text-sm text-slate-600 dark:text-slate-400">{formatDate(day)}</p>
 				</div>
 			</div>
 			<div className="fr justify-center items-center gap-2">
@@ -69,7 +101,7 @@ const Task = ({ task, variants }) => {
 					initial={{ y: 0 }}
 					whileHover={{ y: -2, shadow: '0 0 10px rgba(0,0,0,0.5)' }}
 					onClick={handleUpdate}
-					className="p-2 bg-slate-300 hover:bg-slate-400 transition-colors rounded-md"
+					className="p-2 bg-slate-300 dark:bg-slate-500 hover:bg-slate-400 transition-colors rounded-md"
 				>
 					<TbEdit />
 				</motion.button>
@@ -77,8 +109,8 @@ const Task = ({ task, variants }) => {
 				<motion.button
 					initial={{ y: 0 }}
 					whileHover={{ y: -2, shadow: '0 0 10px rgba(0,0,0,0.5)' }}
-					onClick={handleDelete}
-					className="p-2 bg-slate-300 hover:bg-slate-400 transition-colors rounded-md"
+					onClick={() => handleDelete(task.id)}
+					className="p-2 bg-slate-300 dark:bg-slate-500 hover:bg-slate-400 transition-colors rounded-md"
 				>
 					<TbTrashFilled />
 				</motion.button>

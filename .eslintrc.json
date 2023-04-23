@@ -1,3 +1,8 @@
 {
-	"extends": "react-app"
+	"extends": "react-app",
+	// stop errors for useeffect dependencies and empty destructuring
+	"rules": {
+		"react-hooks/exhaustive-deps": "off",
+		"no-empty-pattern": "off"
+	}
 }

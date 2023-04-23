@@ -10,7 +10,7 @@
 		"lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
 		"preview": "vite preview",
 		"predeploy": "npm run build",
-		"deploy": "gh-pages -d build"
+		"deploy": "gh-pages -d dist"
 	},
 	"dependencies": {
 		"firebase": "^9.20.0",
@@ -21,7 +21,9 @@
 		"react-firebase-hooks": "^5.1.1",
 		"react-hot-toast": "^2.4.0",
 		"react-icons": "^4.8.0",
-		"react-spring": "^9.7.1"
+		"react-router-dom": "^6.10.0",
+		"react-spring": "^9.7.1",
+		"use-keyboard-shortcut": "^1.1.6"
 	},
 	"devDependencies": {
 		"@types/react": "^18.0.28",
