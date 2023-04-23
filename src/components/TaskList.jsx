@@ -3,6 +3,7 @@ import { FirebaseContext } from '../services/FirebaseContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import Task from './Task';
 import { AiOutlineInbox } from 'react-icons/ai';
+import { IoIosSad } from 'react-icons/io';
 
 const TaskList = () => {
 	const { tasks, selectedFilter } = useContext(FirebaseContext);
@@ -116,18 +117,36 @@ const TaskList = () => {
 						</AnimatePresence>
 					</motion.div>
 				) : (
-					<AnimatePresence>
-						<motion.div
-							initial={{ opacity: 0, y: 20 }}
-							animate={{ opacity: 1, y: 0 }}
-							exit={{ opacity: 0, y: 20 }}
-							className="w-full h-full fc items-center justify-center my-3"
-						>
-							<AiOutlineInbox className="text-6xl text-slate-500" />
-							<p className="text-xl">No todos</p>
-							<p className="text-base text-slate-500">Click add task or press Shift + A</p>
-						</motion.div>
-					</AnimatePresence>
+					<>
+						{selectedFilter === 'all' && (
+							<AnimatePresence>
+								<motion.div
+									initial={{ opacity: 0, y: 20 }}
+									animate={{ opacity: 1, y: 0 }}
+									exit={{ opacity: 0, y: 20 }}
+									className="w-full h-full fc items-center justify-center my-3"
+								>
+									<AiOutlineInbox className="text-6xl text-slate-500" />
+									<p className="text-xl">No todos</p>
+									<p className="text-base text-slate-500">Click add task or press Shift + A</p>
+								</motion.div>
+							</AnimatePresence>
+						)}
+						{(selectedFilter === 'complete' || selectedFilter === 'incomplete') && (
+							<AnimatePresence>
+								<motion.div
+									initial={{ opacity: 0, y: 20 }}
+									animate={{ opacity: 1, y: 0 }}
+									exit={{ opacity: 0, y: 20 }}
+									className="w-full h-full fc items-center justify-center my-3"
+								>
+									<IoIosSad className="text-6xl text-slate-500" />
+									<p className="text-xl">No todos in this filter</p>
+									<p className="text-base text-slate-500">Set another filter or add a task</p>
+								</motion.div>
+							</AnimatePresence>
+						)}
+					</>
 				)}
 			</AnimatePresence>
 		</div>

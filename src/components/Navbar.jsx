@@ -7,9 +7,9 @@ const Navbar = () => {
 	return (
 		<div className="w-full py-6">
 			<div className="fr justify-between items-center">
-				<h1 className="text-3xl font-semibold italic tracking-tighter">Just Do It</h1>
+				<h1 className="text-2xl sm:text-3xl font-semibold italic tracking-tighter">Just Do It</h1>
 				<div className="fr justify-between items-center gap-3">
-					<p className="text-xl">{user.displayName}</p>
+					<p className="hidden sm:block text-xl">{user.displayName}</p>
 					<div className="relative">
 						<img
 							src={user.photoURL}

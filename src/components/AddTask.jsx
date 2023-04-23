@@ -52,7 +52,7 @@ const AddTask = ({ set }) => {
 				initial={{ opacity: 0, scale: 0.5 }}
 				animate={{ opacity: 1, scale: 1 }}
 				exit={{ opacity: 0, scale: 0.2 }}
-				className="w-1/2 bg-slate-200 dark:bg-slate-800 dark:text-white rounded-lg z-10 px-10 py-7"
+				className="w-[80%] sm:w-1/2 bg-slate-200 dark:bg-slate-800 dark:text-white rounded-lg z-10 px-7 sm:px-10 py-7"
 			>
 				<form className="w-full fc justify-center items-start gap-3">
 					<h3 className="text-2xl">Add Todo</h3>

@@ -55,7 +55,7 @@ const Dashboard = () => {
 					className="w-screen h-screen fc items-center justify-start px-10 font-rubik overflow-x-hidden scrollbar-hide relative dark:bg-slate-900 dark:text-white"
 				>
 					<Navbar />
-					<h1 className="text-5xl font-medium pt-24 ">
+					<h1 className="text-5xl font-medium pt-24">
 						{greeting()}, {user.displayName.split(' ')[0]}
 					</h1>
 					<div className="fr justify-between items-center w-full">
@@ -63,7 +63,7 @@ const Dashboard = () => {
 							className="px-7 py-2 fr justify-center items-center rounded-lg bg-violet-600 text-white mt-3 gap-2"
 							onClick={(e) => setAddTaskVisible(true)}
 						>
-							Add Task <span className="text-sm text-zinc-300">Shift + A</span>
+							Add Task <span className="hidden sm:block text-sm text-zinc-300">Shift + A</span>
 						</button>
 						<select
 							className="px-7 py-2 rounded-lg bg-slate-200 dark:bg-slate-700 dark:text-white text-black mt-3"
