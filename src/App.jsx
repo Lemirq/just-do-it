@@ -17,6 +17,7 @@ function App() {
 	const [id, setId] = useState('');
 	const [selectedFilter, setSelectedFilter] = useState('all');
 	const [addTaskVisible, setAddTaskVisible] = useState(false);
+	const [selectedTask, setSelectedTask] = useState(0);
 	const [signInWithGoogle] = useSignInWithGoogle(auth);
 	const [user] = useAuthState(auth);
 	useEffect(() => {
@@ -69,6 +70,8 @@ function App() {
 				setAddTaskVisible,
 				signInWithGoogle,
 				user,
+				selectedTask,
+				setSelectedTask,
 			}}
 		>
 			<AnimatePresence>{addTaskVisible && <AddTask set={() => setAddTaskVisible(false)} />}</AnimatePresence>

@@ -52,10 +52,10 @@ const Dashboard = () => {
 					initial={{ scale: 0.2 }}
 					animate={{ scale: 1 }}
 					exit={{ scale: 0.2 }}
-					className="w-screen h-screen fc items-center justify-start px-10 font-rubik overflow-x-hidden scrollbar-hide relative dark:bg-slate-900 dark:text-white"
+					className="w-screen h-screen fc items-center justify-start px-4 sm:px-10 font-rubik overflow-x-hidden scrollbar-hide relative dark:bg-slate-900 dark:text-white"
 				>
 					<Navbar />
-					<h1 className="text-5xl font-medium pt-24">
+					<h1 className="text-5xl font-medium pt-24 mb-4">
 						{greeting()}, {user.displayName.split(' ')[0]}
 					</h1>
 					<div className="fr justify-between items-center w-full">

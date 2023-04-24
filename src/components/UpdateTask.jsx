@@ -6,10 +6,9 @@ import { FirebaseContext } from '../services/FirebaseContext';
 const UpdateTask = ({ set, id }) => {
 	const { tasks, user } = useContext(FirebaseContext);
 	console.log(tasks);
-	const [name, setName] = useState('');
+	const [name, setName] = useState(tasks.find((task) => task.id === id).text);
 	const [status, setStatus] = useState('incomplete');
 	const [seconds, setSeconds] = useState(100);
-
 	const handleUpdate = (e) => {
 		e?.preventDefault();
 		update(ref(db, `/users/${user.uid}/${id}`), {
@@ -17,6 +16,10 @@ const UpdateTask = ({ set, id }) => {
 			status: status,
 		});
 		set();
+	};
+
+	const onFocus = (e) => {
+		e.target.select();
 	};
 
 	const handleCancel = (e) => {
@@ -52,6 +55,7 @@ const UpdateTask = ({ set, id }) => {
 							<p>Title</p>
 							<input
 								autoFocus
+								onFocus={onFocus}
 								className="w-full px-2 py-2 rounded-lg dark:bg-slate-600 outline-none"
 								type="text"
 								value={name}
