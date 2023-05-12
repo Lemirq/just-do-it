@@ -7,6 +7,13 @@ export default {
 			fontFamily: {
 				rubik: ['Rubik', 'sans-serif'],
 			},
+			screens: {
+				standalone: { raw: '(display-mode: standalone)' },
+				xs: '480px',
+			},
+			colors: {
+				important: { raw: '!important' },
+			},
 		},
 	},
 	plugins: [],

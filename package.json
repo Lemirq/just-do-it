@@ -5,25 +5,28 @@
 	"version": "0.0.0",
 	"type": "module",
 	"scripts": {
-		"dev": "vite",
+		"dev": "vite --host",
 		"build": "vite build --base /just-do-it/",
 		"lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
 		"preview": "vite preview",
 		"predeploy": "npm run build",
-		"deploy": "gh-pages -d dist"
+		"deploy": "gh-pages -d dist",
+		"postbuild": "cp public/404.html dist/404.html && cp public/.htaccess dist/.htaccess"
 	},
 	"dependencies": {
 		"firebase": "^9.20.0",
 		"framer-motion": "^10.12.4",
 		"gh-pages": "^5.0.0",
+		"pwa-asset-generator": "^6.3.0",
 		"react": "^18.2.0",
+		"react-circular-progressbar": "^2.1.0",
 		"react-dom": "^18.2.0",
 		"react-firebase-hooks": "^5.1.1",
 		"react-hot-toast": "^2.4.0",
 		"react-icons": "^4.8.0",
 		"react-router-dom": "^6.10.0",
-		"react-spring": "^9.7.1",
-		"use-keyboard-shortcut": "^1.1.6"
+		"react-select": "^5.7.2",
+		"react-spring": "^9.7.1"
 	},
 	"devDependencies": {
 		"@types/react": "^18.0.28",
